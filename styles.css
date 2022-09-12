@@ -1,0 +1,218 @@
+/*////////////////////////*/
+/*/ //// GENERAL //////////*/
+/*////////////////////////*/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  /* font-family: "Roboto", sans-serif; */
+  background-image: linear-gradient(to top left, #f7f7f7, #c3fae8);
+  /* background-color: green; */
+  background-size: cover;
+  height: 100vh;
+  color: #444;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main {
+  background-color: #f7f7f7;
+  width: 140rem;
+  height: 80rem;
+  border-radius: 1.8rem;
+  box-shadow: 0rem 2rem 3.2rem rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(200px);
+}
+
+.grid {
+  display: grid;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.grid--4-cols {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.box {
+  height: 100%;
+  width: 100%;
+}
+
+.btn {
+  border-radius: 1.8rem;
+  border: none;
+  transition: all 0.2s linear;
+  /* font-family: "roboto"; */
+  font-weight: 400;
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+/*/ ///////////////////////*/
+/*///// INTRO BOX ////////*/
+/*/ ///////////////////////*/
+
+.box-intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 18rem;
+}
+
+.title {
+  font-size: 6rem;
+  font-weight: bold;
+}
+
+.btn-new-game {
+  font-size: 2rem;
+  width: 20rem;
+  height: 8rem;
+  box-shadow: 0rem 2rem 3.2rem -1rem rgba(0, 0, 0, 0.25);
+  background-color: #c3fae8;
+  color: #444;
+  font-weight: bold;
+}
+
+.btn-new-game:hover {
+  background-color: #e6fcf5;
+}
+
+/*///////////////////////////////*/
+/*/ /// CHOOSE CATEGORY BOX //////*/
+/*///////////////////////////////*/
+
+.box-choose-category {
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 3.6rem;
+  padding: 3.6rem 6rem;
+}
+
+.box-heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.heading-categories {
+  font-size: 3.6rem;
+}
+
+.grid-categories {
+  row-gap: 1.8rem;
+  column-gap: 1.8rem;
+  grid-template-rows: repeat(3, 1fr);
+  height: 100%;
+}
+
+.btn-category {
+  height: 100%;
+  width: 100%;
+  border: 2px solid #999;
+}
+
+.btn-category:hover {
+  background-color: #96f2d7;
+  color: #1e302b;
+  border: solid 2px #96f2d7;
+  box-shadow: 0rem 2rem 3.2rem rgba(0, 0, 0, 0.25);
+}
+
+.btn-category:active {
+  box-shadow: none;
+  box-shadow: 0rem 0.5rem 1.2rem rgba(0, 0, 0, 0.1);
+}
+
+.icon-category {
+  font-size: 3.6rem;
+}
+
+.title-category {
+  font-size: 1.8rem;
+  /* text-transform: uppercase; */
+}
+
+.btn-category > span {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.8rem;
+}
+
+/*///////////////////////////////*/
+/*/ /// GAME BOX ////////////////*/
+/*///////////////////////////////*/
+
+.box-game {
+  padding: 6rem;
+  /* justify-content: space-between; */
+
+  gap: 6rem;
+}
+
+.box-question {
+  gap: 2.4rem;
+  border-radius: 1.8rem;
+}
+
+.title-question {
+  font-size: 4rem;
+}
+
+.current-question {
+  font-size: 3.2rem;
+}
+
+.answer-choice-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(4, 1fr);
+  gap: 1.2rem;
+  height: 100%;
+  /* margin:auto; */
+}
+
+.btn-answer-choice {
+  /* font-family: "roboto"; */
+  width: 100%;
+  text-align: left;
+  padding: 1.2rem 2.4rem;
+  height: 100%;
+  font-size: 1.8rem;
+
+  display: block;
+}
+
+.btn-answer-choice:hover {
+  background-color: #96f2d7;
+}
+
+/* ///////////////////////////////////////////////////////////////////////////// */
+
+.hidden {
+  display: none;
+}

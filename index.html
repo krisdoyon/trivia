@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Document</title>
+
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap"
+      rel="stylesheet"
+    /> -->
+    <link href="styles.css" rel="stylesheet" />
+    <script defer src="script.js"></script>
+    <!-- <script src="https://unpkg.com/phosphor-icons"></script> -->
+  </head>
+  <body>
+    <main>
+      <div class="box box-intro">
+        <h1 class="title">Let's Play Trivia!</h1>
+        <button class="btn btn-new-game">New Game</button>
+      </div>
+
+      <div class="box box-choose-category flex hidden">
+        <div class="box-heading">
+          <h2 class="heading-categories">Choose category</h2>
+        </div>
+        <div class="grid grid--4-cols grid-categories">
+          <button class="btn btn-category" id="btn-animals">
+            <span>
+              <i class="ph-paw-print icon-category"></i>
+              <span class="title-category">Animals</span>
+            </span>
+          </button>
+          <button class="btn btn-category" id="btn-books">
+            <span>
+              <i class="ph-books icon-category"></i>
+              <span class="title-category">Books</span>
+            </span>
+          </button>
+          <button class="btn btn-category">
+            <span>
+              <i class="ph-lightbulb icon-category"></i>
+              <span class="title-category">General</span>
+            </span>
+          </button>
+          <button class="btn btn-category">
+            <span>
+              <i class="ph-globe-hemisphere-west icon-category"></i>
+              <span class="title-category">Geography</span>
+            </span>
+          </button>
+          <button class="btn btn-category">
+            <span>
+              <i class="ph-books icon-category"></i>
+              <span class="title-category">History</span>
+            </span>
+          </button>
+          <button class="btn btn-category">
+            <span>
+              <i class="ph-calculator icon-category"></i>
+              <span class="title-category">Math</span>
+            </span>
+          </button>
+          <button class="btn btn-category">
+            <span>
+              <i class="ph-film-slate icon-category"></i>
+              <span class="title-category">Movies</span>
+            </span>
+          </button>
+          <button class="btn btn-category">
+            <span>
+              <i class="ph-music-notes icon-category"></i>
+              <span class="title-category">Music</span>
+            </span>
+          </button>
+          <button class="btn btn-category">
+            <span>
+              <i class="ph-bank icon-category"></i>
+              <span class="title-category">Politics</span>
+            </span>
+          </button>
+          <button class="btn btn-category">
+            <span>
+              <i class="ph-atom icon-category"></i>
+              <span class="title-category">Science</span>
+            </span>
+          </button>
+          <button class="btn btn-category">
+            <span>
+              <i class="ph-television icon-category"></i>
+              <span class="title-category">TV</span>
+            </span>
+          </button>
+          <button class="btn btn-category">
+            <span>
+              <i class="ph-circle-wavy-question icon-category"></i>
+              <span class="title-category">Random</span>
+            </span>
+          </button>
+        </div>
+      </div>
+
+      <div class="box box-game flex-column hidden">
+        <div class="box-question flex-column">
+          <h3 class="title-question">Question #1:</h3>
+          <p class="current-question"></p>
+        </div>
+        <ul class="answer-choice-list">
+          <li>
+            <button class="btn btn-answer-choice">
+              <span class="answer-choice-letter">A.</span>
+              <span class="answer-choice-text"
+                >Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam
+                non ad dolorem? Dignissimos totam vel eius praesentium magni
+                commodi, nulla repellat autem, ipsa molestias sed facere quo non
+                earum illo!</span
+              >
+            </button>
+          </li>
+          <li><button class="btn btn-answer-choice">B.</button></li>
+          <li><button class="btn btn-answer-choice">C.</button></li>
+          <li><button class="btn btn-answer-choice">D.</button></li>
+        </ul>
+      </div>
+    </main>
+  </body>
+</html>
