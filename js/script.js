@@ -1,5 +1,7 @@
 "use strict";
 
+let questionTimer;
+
 const triviaGame = {
   category: undefined,
   categoryNumber: undefined,
@@ -11,100 +13,6 @@ const triviaGame = {
   score: 0,
   answered: false,
   correctIndexes: [],
-
-  getQuestions() {
-    const xhr = new XMLHttpRequest();
-    xhr.open(
-      "GET",
-      `https://opentdb.com/api.php?amount=10&category=${this.categoryNumber}&type=multiple`
-    );
-    xhr.responseType = "json";
-
-    xhr.send();
-
-    xhr.onload = function () {
-      triviaGame.data = xhr.response.results;
-      triviaGame.questions = triviaGame.data.map(
-        (object) => object["question"]
-      );
-      triviaGame.incorrectAnswers = triviaGame.data.map(
-        (object) => object["incorrect_answers"]
-      );
-      triviaGame.correctAnswers = triviaGame.data.map(
-        (object) => object["correct_answer"]
-      );
-    };
-  },
-
-  startGameTimer() {
-    const tick = function () {
-      labelTimer.textContent = timeRemaining;
-      if (timeRemaining === 0) {
-        clearInterval(timer);
-        boxTimerEl.classList.add("hidden");
-        boxGameEl.classList.remove("hidden");
-        triviaGame.randomizeAnswers();
-      }
-      timeRemaining--;
-    };
-    let timeRemaining = 3;
-    tick();
-    const timer = setInterval(tick, 1000);
-    return timer;
-  },
-
-  randomizeAnswers() {
-    this.incorrectAnswers.forEach((answersArr, i) => {
-      this.answers.push(
-        [...answersArr, this.correctAnswers[i]].sort(() => Math.random() - 0.5)
-      );
-      this.correctIndexes.push(this.answers[i].indexOf(this.correctAnswers[i]));
-    });
-  },
-
-  startQuestionTimer() {},
-
-  updateQuestion() {
-    this.answered = false;
-    labelQuestionNumber.textContent = `Question #${
-      triviaGame.currentQuestion + 1
-    }:`;
-    labelCurrentQuestion.innerHTML = this.questions[this.currentQuestion];
-    nextButtonEl.style.opacity = 0;
-    nextButtonEl.style.visibility = "hidden";
-    nextButtonEl.style.display = "none";
-
-    answerButtons.forEach((button, i) => {
-      button.innerHTML = this.answers[this.currentQuestion][i];
-      button.classList.remove("correct-answer");
-      button.classList.remove("incorrect-answer");
-      button.classList.remove("selected-answer");
-    });
-  },
-
-  updateScore() {
-    labelScore.textContent = `${this.score} / ${this.currentQuestion}`;
-  },
-
-  resetGame() {
-    this.currentQuestion = 0;
-    this.score = 0;
-    this.answers = [];
-    this.correctIndexes = [];
-    this.category = undefined;
-    this.categoryNumber = undefined;
-    this.questions = [];
-    this.incorrectAnswers = [];
-    this.correctAnswers = [];
-    this.answered = false;
-    boxGameEl.classList.add("hidden");
-    boxCategoriesEl.classList.remove("hidden");
-    labelScore.textContent = triviaGame.score;
-
-    playAgainButtonEl.style.opacity = 0;
-    playAgainButtonEl.style.visibility = "hidden";
-    playAgainButtonEl.style.display = "none";
-  },
 };
 
 const categoriesMap = new Map([
@@ -158,8 +66,162 @@ const labelCurrentQuestion = document.querySelector(".current-question");
 const labelScore = document.querySelector(".current-score");
 const labelCategory = document.querySelector(".current-category");
 const labelTimer = document.querySelector(".countdown-timer");
+const labelTimeRemaining = document.querySelector(".time-remaining");
 const labelQuestionNumber = document.querySelector(".title-question");
 const answerButtons = document.querySelectorAll(".btn-answer-choice");
+
+const questionTimerEl = document.querySelector(".question-timer");
+
+///////////////////////////////////////////////////////////////////
+// FUNCTIONS
+
+const getQuestions = function (game) {
+  const xhr = new XMLHttpRequest();
+  xhr.open(
+    "GET",
+    `https://opentdb.com/api.php?amount=10&category=${game.categoryNumber}&type=multiple`
+  );
+  xhr.responseType = "json";
+
+  xhr.send();
+
+  xhr.onload = function () {
+    game.data = xhr.response.results;
+    game.questions = game.data.map((object) => object["question"]);
+    game.incorrectAnswers = game.data.map(
+      (object) => object["incorrect_answers"]
+    );
+    game.correctAnswers = game.data.map((object) => object["correct_answer"]);
+  };
+};
+
+const startGameTimer = function (game) {
+  const tick = function () {
+    labelTimer.textContent = timeRemaining;
+    if (timeRemaining === 0) {
+      clearInterval(timer);
+      boxTimerEl.classList.add("hidden");
+      boxGameEl.classList.remove("hidden");
+      randomizeAnswers(game);
+      updateScore(game);
+    }
+    timeRemaining--;
+  };
+  let timeRemaining = 3;
+  tick();
+  const timer = setInterval(tick, 1000);
+  return timer;
+};
+
+const tick = function () {};
+
+const startQuestionTimer = function (game) {
+  const tick = function () {
+    labelTimeRemaining.textContent = timeRemaining;
+    console.log(timeRemaining);
+    if (timeRemaining === 5) {
+      questionTimerEl.classList.add("low-time");
+    }
+    if (timeRemaining === 0) {
+      clearInterval(timer);
+      revealCorrectAnswer(game);
+      answerButtons.forEach((button) => button.classList.add("no-hover"));
+      displayButton(game);
+      game.currentQuestion++;
+      updateScore(game);
+    }
+    timeRemaining--;
+  };
+  let timeRemaining = 15;
+  tick();
+  const timer = setInterval(tick, 1000);
+  return timer;
+};
+
+const randomizeAnswers = function (game) {
+  game.incorrectAnswers.forEach((answersArr, i) => {
+    game.answers.push(
+      [...answersArr, game.correctAnswers[i]].sort(() => Math.random() - 0.5)
+    );
+    game.correctIndexes.push(game.answers[i].indexOf(game.correctAnswers[i]));
+  });
+};
+
+const revealCorrectAnswer = function (game) {
+  answerButtons[game.correctIndexes[game.currentQuestion]].classList.add(
+    "correct-answer"
+  );
+};
+
+// const startQuestionTimer = function(game) {};
+
+const updateQuestion = function (game) {
+  questionTimer = startQuestionTimer(game);
+  questionTimerEl.classList.remove("low-time");
+  game.answered = false;
+  labelQuestionNumber.textContent = `Question #${game.currentQuestion + 1}:`;
+  labelCurrentQuestion.innerHTML = game.questions[game.currentQuestion];
+  answerButtons.forEach((button) => button.classList.remove("no-hover"));
+  nextButtonEl.classList.add("hidden");
+  questionTimerEl.classList.remove("hidden");
+
+  answerButtons.forEach((button, i) => {
+    button.innerHTML = game.answers[game.currentQuestion][i];
+    button.classList.remove("correct-answer");
+    button.classList.remove("incorrect-answer");
+    button.classList.remove("selected-answer");
+  });
+};
+
+const updateScore = function (game) {
+  labelScore.textContent = `${game.score} / ${game.currentQuestion}`;
+};
+
+const updateCategory = function (game) {
+  labelCategory.textContent = `${game.category}`;
+};
+
+const resetGame = function (game) {
+  game.currentQuestion = 0;
+  game.score = 0;
+  game.answers = [];
+  game.correctIndexes = [];
+  game.category = undefined;
+  game.categoryNumber = undefined;
+  game.questions = [];
+  game.incorrectAnswers = [];
+  game.correctAnswers = [];
+  game.answered = false;
+  boxGameEl.classList.add("hidden");
+  boxCategoriesEl.classList.remove("hidden");
+  updateScore(game);
+  answerButtons.forEach((button, i) => {
+    // button.innerHTML = game.answers[game.currentQuestion][i];
+    button.classList.remove("correct-answer");
+    button.classList.remove("incorrect-answer");
+    button.classList.remove("selected-answer");
+  });
+  playAgainButtonEl.classList.add("hidden");
+};
+
+const randomCategory = function (game) {
+  game.categoryNumber =
+    categoriesNumbers[Math.trunc(Math.random() * categoriesNumbers.length)];
+};
+
+const displayQuestionTimer = function () {
+  questionTimerEl.classList.remove("hidden");
+  playAgainButtonEl.classList.add("hidden");
+  nextButtonEl.classList.add("hidden");
+};
+
+const displayButton = function (game) {
+  const button = game.currentQuestion < 9 ? nextButtonEl : playAgainButtonEl;
+  setTimeout(function () {
+    questionTimerEl.classList.add("hidden");
+    button.classList.remove("hidden");
+  }, 1500);
+};
 
 ///////////////////////////////////////////////////////////////////
 // EVENT HANDLERS
@@ -177,8 +239,7 @@ categoryButtons.forEach((button) => {
     triviaGame.category = labelCategory.textContent =
       button.getElementsByClassName("title-category")[0].textContent;
     if (triviaGame.category === "Random") {
-      triviaGame.categoryNumber =
-        categoriesNumbers[Math.trunc(Math.random() * categoriesNumbers.length)];
+      randomCategory(triviaGame);
     } else {
       triviaGame.categoryNumber = categoriesMap.get(
         button.getElementsByClassName("title-category")[0].textContent
@@ -186,11 +247,11 @@ categoryButtons.forEach((button) => {
     }
     boxCategoriesEl.classList.add("hidden");
     boxTimerEl.classList.remove("hidden");
-    triviaGame.getQuestions();
-    triviaGame.startGameTimer();
+    getQuestions(triviaGame);
+    startGameTimer(triviaGame);
     setTimeout(function () {
       boxGameEl.classList.remove("hidden");
-      triviaGame.updateQuestion();
+      updateQuestion(triviaGame);
     }, 3000);
   });
 });
@@ -198,43 +259,28 @@ categoryButtons.forEach((button) => {
 answerButtons.forEach((button, i) => {
   button.addEventListener("click", function () {
     if (!triviaGame.answered && triviaGame.currentQuestion <= 9) {
+      clearInterval(questionTimer);
       if (triviaGame.correctIndexes[triviaGame.currentQuestion] === i) {
         triviaGame.score++;
-      }
-      answerButtons.forEach((button, i) => {
-        // correctIndex =
-        triviaGame.correctIndexes[triviaGame.currentQuestion] === i
-          ? button.classList.add("correct-answer")
-          : button.classList.add("incorrect-answer");
-      });
-
-      if (triviaGame.currentQuestion < 9) {
-        setTimeout(function () {
-          nextButtonEl.style.opacity = 1;
-          nextButtonEl.style.visibility = "visible";
-          nextButtonEl.style.display = "block";
-        }, 1500);
       } else {
-        setTimeout(function () {
-          playAgainButtonEl.style.opacity = 1;
-          playAgainButtonEl.style.visibility = "visible";
-          playAgainButtonEl.style.display = "block";
-        }, 1500);
+        button.classList.add("incorrect-answer");
       }
+      revealCorrectAnswer(triviaGame);
+      answerButtons[
+        triviaGame.correctIndexes[triviaGame.currentQuestion]
+      ].classList.add("correct-answer");
+
+      answerButtons.forEach((button) => button.classList.add("no-hover"));
+
+      displayButton(triviaGame);
       triviaGame.currentQuestion++;
-      triviaGame.updateScore.call(triviaGame);
+      updateScore(triviaGame);
       button.classList.add("selected-answer");
       triviaGame.answered = true;
     }
   });
 });
 
-nextButtonEl.addEventListener(
-  "click",
-  triviaGame.updateQuestion.bind(triviaGame)
-);
+nextButtonEl.addEventListener("click", updateQuestion.bind(null, triviaGame));
 
-playAgainButtonEl.addEventListener(
-  "click",
-  triviaGame.resetGame.bind(triviaGame)
-);
+playAgainButtonEl.addEventListener("click", resetGame.bind(null, triviaGame));
