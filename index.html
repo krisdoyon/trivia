@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Document</title>
+    <title>Let's Play Trivia!</title>
 
-    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" /> -->
+    <!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /> -->
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap"
       rel="stylesheet"
-    /> -->
+    />
     <link href="css/styles.css" rel="stylesheet" />
     <script defer src="js/script.js"></script>
     <!-- <script src="https://unpkg.com/phosphor-icons"></script> -->
@@ -24,7 +24,7 @@
         <button class="btn btn-new-game">New Game</button>
       </div>
 
-      <div class="box box-choose-category flex hidden">
+      <div class="box box-choose-category flex-column hidden">
         <div class="box-heading">
           <h2 class="heading-categories">Choose category</h2>
         </div>
@@ -41,61 +41,61 @@
               <span class="title-category">Books</span>
             </span>
           </button>
-          <button class="btn btn-category">
+          <button class="btn btn-category" id="btn-general">
             <span>
               <i class="ph-lightbulb icon-category"></i>
               <span class="title-category">General</span>
             </span>
           </button>
-          <button class="btn btn-category">
+          <button class="btn btn-category" id="btn-geography">
             <span>
               <i class="ph-globe-hemisphere-west icon-category"></i>
               <span class="title-category">Geography</span>
             </span>
           </button>
-          <button class="btn btn-category">
+          <button class="btn btn-category" id="btn-history">
             <span>
               <i class="ph-books icon-category"></i>
               <span class="title-category">History</span>
             </span>
           </button>
-          <button class="btn btn-category">
+          <button class="btn btn-category" id="btn-math">
             <span>
               <i class="ph-calculator icon-category"></i>
               <span class="title-category">Math</span>
             </span>
           </button>
-          <button class="btn btn-category">
+          <button class="btn btn-category" id="btn-movies">
             <span>
               <i class="ph-film-slate icon-category"></i>
               <span class="title-category">Movies</span>
             </span>
           </button>
-          <button class="btn btn-category">
+          <button class="btn btn-category" id="btn-music">
             <span>
               <i class="ph-music-notes icon-category"></i>
               <span class="title-category">Music</span>
             </span>
           </button>
-          <button class="btn btn-category">
+          <button class="btn btn-category" id="btn-politics">
             <span>
               <i class="ph-bank icon-category"></i>
               <span class="title-category">Politics</span>
             </span>
           </button>
-          <button class="btn btn-category">
+          <button class="btn btn-category" id="btn-science">
             <span>
               <i class="ph-atom icon-category"></i>
               <span class="title-category">Science</span>
             </span>
           </button>
-          <button class="btn btn-category">
+          <button class="btn btn-category" id="btn-tv">
             <span>
               <i class="ph-television icon-category"></i>
               <span class="title-category">TV</span>
             </span>
           </button>
-          <button class="btn btn-category">
+          <button class="btn btn-category" id="btn-random">
             <span>
               <i class="ph-circle-wavy-question icon-category"></i>
               <span class="title-category">Random</span>
@@ -104,26 +104,44 @@
         </div>
       </div>
 
+      <div class="box box-difficulty flex-column hidden">
+        <button class="btn btn-back">Change category</button>
+        <div class="box-heading">
+          <h2 class="heading-difficulty">Choose difficulty</h2>
+        </div>
+        <div class="grid grid--3-cols grid-difficulty">
+          <button class="btn btn-difficulty">Easy</button>
+          <button class="btn btn-difficulty">Medium</button>
+          <button class="btn btn-difficulty">Hard</button>
+        </div>
+      </div>
+
+      <div class="box box-timer flex hidden">
+        <span class="countdown-timer">3</span>
+      </div>
+
       <div class="box box-game flex-column hidden">
+        <div class="score-tab">
+          <strong>Score: </strong><span class="current-score">0</span> / 10
+        </div>
+        <button class="btn btn-next">Next Question</button>
         <div class="box-question flex-column">
           <h3 class="title-question">Question #1:</h3>
           <p class="current-question"></p>
         </div>
         <ul class="answer-choice-list">
           <li>
-            <button class="btn btn-answer-choice">
-              <span class="answer-choice-letter">A.</span>
-              <span class="answer-choice-text"
-                >Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam
-                non ad dolorem? Dignissimos totam vel eius praesentium magni
-                commodi, nulla repellat autem, ipsa molestias sed facere quo non
-                earum illo!</span
-              >
-            </button>
+            <button class="btn btn-answer-choice"></button>
           </li>
-          <li><button class="btn btn-answer-choice">B.</button></li>
-          <li><button class="btn btn-answer-choice">C.</button></li>
-          <li><button class="btn btn-answer-choice">D.</button></li>
+          <li>
+            <button class="btn btn-answer-choice"></button>
+          </li>
+          <li>
+            <button class="btn btn-answer-choice"></button>
+          </li>
+          <li>
+            <button class="btn btn-answer-choice"></button>
+          </li>
         </ul>
       </div>
     </main>
