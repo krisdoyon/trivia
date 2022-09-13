@@ -9,6 +9,8 @@ const triviaGame = {
   answers: [],
   currentQuestion: 0,
   score: 0,
+  answered: false,
+  correctIndexes: [],
 
   getQuestions() {
     const xhr = new XMLHttpRequest();
@@ -36,7 +38,6 @@ const triviaGame = {
 
   startGameTimer() {
     const tick = function () {
-      console.log(timeRemaining);
       labelTimer.textContent = timeRemaining;
       if (timeRemaining === 0) {
         clearInterval(timer);
@@ -57,12 +58,14 @@ const triviaGame = {
       this.answers.push(
         [...answersArr, this.correctAnswers[i]].sort(() => Math.random() - 0.5)
       );
+      this.correctIndexes.push(this.answers[i].indexOf(this.correctAnswers[i]));
     });
   },
 
   startQuestionTimer() {},
 
   updateQuestion() {
+    this.answered = false;
     labelQuestionNumber.textContent = `Question #${
       triviaGame.currentQuestion + 1
     }:`;
@@ -73,6 +76,26 @@ const triviaGame = {
       button.classList.remove("correct-answer");
       button.classList.remove("incorrect-answer");
     });
+  },
+
+  resetGame() {
+    this.currentQuestion = 0;
+    this.score = 0;
+    this.answers = [];
+    this.correctIndexes = [];
+    this.category = undefined;
+    this.categoryNumber = undefined;
+    this.questions = [];
+    this.incorrectAnswers = [];
+    this.correctAnswers = [];
+    this.answered = false;
+    boxGameEl.classList.add("hidden");
+    boxCategoriesEl.classList.remove("hidden");
+    labelScore.textContent = triviaGame.score;
+
+    playAgainButtonEl.style.opacity = 0;
+    playAgainButtonEl.style.visibility = "hidden";
+    playAgainButtonEl.style.display = "none";
   },
 };
 
@@ -117,6 +140,7 @@ const tvButtonEl = document.querySelector("#btn-tv");
 const randomButtonEl = document.querySelector("#btn-random");
 const backButtonEl = document.querySelector(".btn-back");
 const nextButtonEl = document.querySelector(".btn-next");
+const playAgainButtonEl = document.querySelector(".btn-play-again");
 
 // CATEGORY BUTTONS NODELISTS
 const categoryButtons = document.querySelectorAll(".btn-category");
@@ -164,23 +188,33 @@ categoryButtons.forEach((button) => {
 
 answerButtons.forEach((button, i) => {
   button.addEventListener("click", function () {
-    const answerChoice = button.textContent;
-    if (
-      answerChoice === triviaGame.correctAnswers[triviaGame.currentQuestion]
-    ) {
-      triviaGame.score++;
-      labelScore.textContent = triviaGame.score;
+    if (!triviaGame.answered && triviaGame.currentQuestion <= 9) {
+      if (triviaGame.correctIndexes[triviaGame.currentQuestion] === i) {
+        triviaGame.score++;
+        labelScore.textContent = triviaGame.score;
+      }
+      answerButtons.forEach((button, i) => {
+        // correctIndex =
+        triviaGame.correctIndexes[triviaGame.currentQuestion] === i
+          ? button.classList.add("correct-answer")
+          : button.classList.add("incorrect-answer");
+      });
+      triviaGame.answered = true;
+      if (triviaGame.currentQuestion < 9) {
+        setTimeout(function () {
+          nextButtonEl.style.opacity = 1;
+          nextButtonEl.style.visibility = "visible";
+          nextButtonEl.style.display = "block";
+        }, 1500);
+      } else {
+        setTimeout(function () {
+          playAgainButtonEl.style.opacity = 1;
+          playAgainButtonEl.style.visibility = "visible";
+          playAgainButtonEl.style.display = "block";
+        }, 1500);
+      }
+      triviaGame.currentQuestion++;
     }
-    answerButtons.forEach((button) => {
-      button.textContent ===
-      triviaGame.correctAnswers[triviaGame.currentQuestion]
-        ? button.classList.add("correct-answer")
-        : button.classList.add("incorrect-answer");
-    });
-    triviaGame.currentQuestion++;
-    setTimeout(function () {
-      nextButtonEl.style.opacity = 1;
-    }, 1500);
   });
 });
 
@@ -189,3 +223,7 @@ nextButtonEl.addEventListener(
   triviaGame.updateQuestion.bind(triviaGame)
 );
 
+playAgainButtonEl.addEventListener(
+  "click",
+  triviaGame.resetGame.bind(triviaGame)
+);
