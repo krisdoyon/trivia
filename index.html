@@ -21,30 +21,36 @@
     <main>
       <div class="box box-intro">
         <h1 class="title">Let's Play Trivia!</h1>
-        <button class="btn btn-new-game">New Game</button>
+        <button class="btn btn-large btn-new-game">New Game</button>
       </div>
 
       <div class="box box-choose-category flex-column hidden">
         <div class="box-heading">
           <h2 class="heading-categories">Choose category</h2>
         </div>
-        <div class="grid grid--4-cols grid-categories">
-          <button class="btn btn-category" id="btn-animals">
-            <span>
-              <i class="ph-paw-print icon-category"></i>
-              <span class="title-category">Animals</span>
-            </span>
-          </button>
-          <button class="btn btn-category" id="btn-books">
+        <div class="grid grid--5-cols grid-categories">
+          <button class="btn btn-category" id="btn-arts">
             <span>
               <i class="ph-books icon-category"></i>
-              <span class="title-category">Books</span>
+              <span class="title-category">Arts & Literature</span>
+            </span>
+          </button>
+          <button class="btn btn-category" id="btn-film">
+            <span>
+              <i class="ph-television icon-category"></i>
+              <span class="title-category">Film & TV</span>
+            </span>
+          </button>
+          <button class="btn btn-category" id="btn-food">
+            <span>
+              <i class="ph-hamburger icon-category"></i>
+              <span class="title-category">Food & Drink</span>
             </span>
           </button>
           <button class="btn btn-category" id="btn-general">
             <span>
               <i class="ph-lightbulb icon-category"></i>
-              <span class="title-category">General</span>
+              <span class="title-category">General Knowledge</span>
             </span>
           </button>
           <button class="btn btn-category" id="btn-geography">
@@ -55,20 +61,8 @@
           </button>
           <button class="btn btn-category" id="btn-history">
             <span>
-              <i class="ph-books icon-category"></i>
+              <i class="ph-bank icon-category"></i>
               <span class="title-category">History</span>
-            </span>
-          </button>
-          <button class="btn btn-category" id="btn-math">
-            <span>
-              <i class="ph-calculator icon-category"></i>
-              <span class="title-category">Math</span>
-            </span>
-          </button>
-          <button class="btn btn-category" id="btn-movies">
-            <span>
-              <i class="ph-film-slate icon-category"></i>
-              <span class="title-category">Movies</span>
             </span>
           </button>
           <button class="btn btn-category" id="btn-music">
@@ -77,47 +71,41 @@
               <span class="title-category">Music</span>
             </span>
           </button>
-          <button class="btn btn-category" id="btn-politics">
-            <span>
-              <i class="ph-bank icon-category"></i>
-              <span class="title-category">Politics</span>
-            </span>
-          </button>
           <button class="btn btn-category" id="btn-science">
             <span>
               <i class="ph-atom icon-category"></i>
               <span class="title-category">Science</span>
             </span>
           </button>
-          <button class="btn btn-category" id="btn-tv">
+          <button class="btn btn-category" id="btn-society">
             <span>
-              <i class="ph-television icon-category"></i>
-              <span class="title-category">TV</span>
+              <i class="ph-users-three icon-category"></i>
+              <span class="title-category">Society & Culture</span>
             </span>
           </button>
-          <button class="btn btn-category" id="btn-random">
+          <button class="btn btn-category" id="btn-sports">
+            <span>
+              <i class="ph-football icon-category"></i>
+              <span class="title-category">Sports & Leisure</span>
+            </span>
+          </button>
+
+          <!-- <button class="btn btn-category" id="btn-random">
             <span>
               <i class="ph-circle-wavy-question icon-category"></i>
               <span class="title-category">Random</span>
             </span>
-          </button>
-        </div>
-      </div>
-
-      <div class="box box-difficulty flex-column hidden">
-        <button class="btn btn-back">Change category</button>
-        <div class="box-heading">
-          <h2 class="heading-difficulty">Choose difficulty</h2>
-        </div>
-        <div class="grid grid--3-cols grid-difficulty">
-          <button class="btn btn-difficulty">Easy</button>
-          <button class="btn btn-difficulty">Medium</button>
-          <button class="btn btn-difficulty">Hard</button>
+          </button> -->
         </div>
       </div>
 
       <div class="box box-timer flex hidden">
         <span class="countdown-timer">3</span>
+      </div>
+
+      <div class="box box-intro box-try-again hidden">
+        <h2 class="title">Error loading questions :(</h2>
+        <button class="btn btn-large btn-try-again">Try Again</button>
       </div>
 
       <div class="box box-game grid hidden">
@@ -144,7 +132,7 @@
           <button class="btn btn-next hidden">
             <span>Next <br />Question</span>
           </button>
-          <button class="btn btn-play-again hidden">Play Again</button>
+          <button class="btn btn-play-again hidden">Play <br />Again</button>
         </div>
         <ul class="answer-choice-list">
           <li>
