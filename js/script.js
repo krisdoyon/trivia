@@ -4,7 +4,7 @@ let questionTimer;
 
 const triviaGame = {
   category: undefined,
-  categoryNumber: undefined,
+  categoryStr: undefined,
   questions: [],
   incorrectAnswers: [],
   correctAnswers: [],
@@ -15,21 +15,36 @@ const triviaGame = {
   correctIndexes: [],
 };
 
+// https://the-trivia-api.com/api/questions?categories=arts_and_literature,film_and_tv,food_and_drink,general_knowledge,geography,history,music,science,society_and_culture,sport_and_leisure&limit=10
+
 const categoriesMap = new Map([
-  ["Animals", 27],
-  ["Books", 10],
-  ["General", 9],
-  ["Geography", 22],
-  ["History", 23],
-  ["Math", 19],
-  ["Movies", 11],
-  ["Music", 12],
-  ["Politics", 24],
-  ["Science", 17],
-  ["TV", 14],
+  ["Arts & Literature", "arts_and_literature"],
+  ["Film & TV", "film_and_tv"],
+  ["Food & Drink", "food_and_drink"],
+  ["General Knowledge", "general_knowledge"],
+  ["Geography", "geography"],
+  ["History", "history"],
+  ["Music", "music"],
+  ["Science", "science"],
+  ["Society & Culture", "society_and_culture"],
+  ["Sports & Leisure", "sport_and_leisure"],
 ]);
 
-const categoriesNumbers = Array.from(categoriesMap.values());
+// const categoriesMap = new Map([
+//   ["Animals", 27],
+//   ["Books", 10],
+//   ["General", 9],
+//   ["Geography", 22],
+//   ["History", 23],
+//   ["Math", 19],
+//   ["Movies", 11],
+//   ["Music", 12],
+//   ["Politics", 24],
+//   ["Science", 17],
+//   ["TV", 14],
+// ]);
+
+const categoriesStrs = Array.from(categoriesMap.values());
 
 ///////////////////////////////////////////////////////////////////
 // ELEMENTS
@@ -39,6 +54,7 @@ const boxIntroEl = document.querySelector(".box-intro");
 const boxCategoriesEl = document.querySelector(".box-choose-category");
 const boxTimerEl = document.querySelector(".box-timer");
 const boxGameEl = document.querySelector(".box-game");
+const boxTryAgainEl = document.querySelector(".box-try-again");
 
 // INDIVIDUAL BUTTONS
 const buttonNewEl = document.querySelector(".btn-new-game");
@@ -57,6 +73,7 @@ const randomButtonEl = document.querySelector("#btn-random");
 const backButtonEl = document.querySelector(".btn-back");
 const nextButtonEl = document.querySelector(".btn-next");
 const playAgainButtonEl = document.querySelector(".btn-play-again");
+const tryAgainButtonEl = document.querySelector(".btn-try-again");
 
 // CATEGORY BUTTONS NODELISTS
 const categoryButtons = document.querySelectorAll(".btn-category");
@@ -77,21 +94,29 @@ const questionTimerEl = document.querySelector(".question-timer");
 
 const getQuestions = function (game) {
   const xhr = new XMLHttpRequest();
+
+  // USING OPEN TRIVIA DB
+  // xhr.open(
+  //   "GET",
+  //   `https://opentdb.com/api.php?amount=10&category=${game.categoryNumber}&type=multiple`
+  // );
+
+  // USING THE TRIVIA API
   xhr.open(
     "GET",
-    `https://opentdb.com/api.php?amount=10&category=${game.categoryNumber}&type=multiple`
+    `https://the-trivia-api.com/api/questions?categories=${game.categoryStr}&limit=10`
   );
   xhr.responseType = "json";
 
   xhr.send();
 
   xhr.onload = function () {
-    game.data = xhr.response.results;
+    game.data = xhr.response;
     game.questions = game.data.map((object) => object["question"]);
     game.incorrectAnswers = game.data.map(
-      (object) => object["incorrect_answers"]
+      (object) => object["incorrectAnswers"]
     );
-    game.correctAnswers = game.data.map((object) => object["correct_answer"]);
+    game.correctAnswers = game.data.map((object) => object["correctAnswer"]);
   };
 };
 
@@ -100,10 +125,17 @@ const startGameTimer = function (game) {
     labelTimer.textContent = timeRemaining;
     if (timeRemaining === 0) {
       clearInterval(timer);
-      boxTimerEl.classList.add("hidden");
-      boxGameEl.classList.remove("hidden");
-      randomizeAnswers(game);
       updateScore(game);
+      boxTimerEl.classList.add("hidden");
+      if (game.data.length) {
+        randomizeAnswers(game);
+        boxGameEl.classList.remove("hidden");
+        updateQuestion(triviaGame);
+        console.log("yes data");
+      } else {
+        boxTryAgainEl.classList.remove("hidden");
+        console.log("no data");
+      }
     }
     timeRemaining--;
   };
@@ -112,8 +144,6 @@ const startGameTimer = function (game) {
   const timer = setInterval(tick, 1000);
   return timer;
 };
-
-const tick = function () {};
 
 const startQuestionTimer = function (game) {
   const tick = function () {
@@ -187,7 +217,7 @@ const resetGame = function (game) {
   game.answers = [];
   game.correctIndexes = [];
   game.category = undefined;
-  game.categoryNumber = undefined;
+  game.categoryStr = undefined;
   game.questions = [];
   game.incorrectAnswers = [];
   game.correctAnswers = [];
@@ -205,8 +235,8 @@ const resetGame = function (game) {
 };
 
 const randomCategory = function (game) {
-  game.categoryNumber =
-    categoriesNumbers[Math.trunc(Math.random() * categoriesNumbers.length)];
+  game.categoryStr =
+    categoriesStrs[Math.trunc(Math.random() * categoriesStrs.length)];
 };
 
 const displayQuestionTimer = function () {
@@ -223,6 +253,20 @@ const displayButton = function (game) {
   }, 1500);
 };
 
+const initializeGame = function (game) {
+  // Show the timer box
+  boxTimerEl.classList.remove("hidden");
+  // Get questions from API
+  getQuestions(game);
+  // Start the countdown timer
+  startGameTimer(game);
+
+  // setTimeout(function () {
+  //   boxGameEl.classList.remove("hidden");
+  //   updateQuestion(triviaGame);
+  // }, 3000);
+};
+
 ///////////////////////////////////////////////////////////////////
 // EVENT HANDLERS
 
@@ -236,23 +280,22 @@ buttonNewEl.addEventListener("click", function () {
 
 categoryButtons.forEach((button) => {
   button.addEventListener("click", function () {
+    // Set the category to the button text content
     triviaGame.category = labelCategory.textContent =
       button.getElementsByClassName("title-category")[0].textContent;
+    // Generate random category number
     if (triviaGame.category === "Random") {
       randomCategory(triviaGame);
+      // Get category number from categories map
     } else {
-      triviaGame.categoryNumber = categoriesMap.get(
+      triviaGame.categoryStr = categoriesMap.get(
         button.getElementsByClassName("title-category")[0].textContent
       );
     }
+    // Hide the categories box
     boxCategoriesEl.classList.add("hidden");
-    boxTimerEl.classList.remove("hidden");
-    getQuestions(triviaGame);
-    startGameTimer(triviaGame);
-    setTimeout(function () {
-      boxGameEl.classList.remove("hidden");
-      updateQuestion(triviaGame);
-    }, 3000);
+
+    initializeGame(triviaGame);
   });
 });
 
@@ -284,3 +327,8 @@ answerButtons.forEach((button, i) => {
 nextButtonEl.addEventListener("click", updateQuestion.bind(null, triviaGame));
 
 playAgainButtonEl.addEventListener("click", resetGame.bind(null, triviaGame));
+
+tryAgainButtonEl.addEventListener(
+  "click",
+  initializeGame.bind(null, triviaGame)
+);
