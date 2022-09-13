@@ -71,11 +71,19 @@ const triviaGame = {
     }:`;
     labelCurrentQuestion.innerHTML = this.questions[this.currentQuestion];
     nextButtonEl.style.opacity = 0;
+    nextButtonEl.style.visibility = "hidden";
+    nextButtonEl.style.display = "none";
+
     answerButtons.forEach((button, i) => {
       button.innerHTML = this.answers[this.currentQuestion][i];
       button.classList.remove("correct-answer");
       button.classList.remove("incorrect-answer");
+      button.classList.remove("selected-answer");
     });
+  },
+
+  updateScore() {
+    labelScore.textContent = `${this.score} / ${this.currentQuestion}`;
   },
 
   resetGame() {
@@ -148,6 +156,7 @@ const categoryButtons = document.querySelectorAll(".btn-category");
 // GAMEPLAY ELEMENTS
 const labelCurrentQuestion = document.querySelector(".current-question");
 const labelScore = document.querySelector(".current-score");
+const labelCategory = document.querySelector(".current-category");
 const labelTimer = document.querySelector(".countdown-timer");
 const labelQuestionNumber = document.querySelector(".title-question");
 const answerButtons = document.querySelectorAll(".btn-answer-choice");
@@ -165,7 +174,7 @@ buttonNewEl.addEventListener("click", function () {
 
 categoryButtons.forEach((button) => {
   button.addEventListener("click", function () {
-    triviaGame.category =
+    triviaGame.category = labelCategory.textContent =
       button.getElementsByClassName("title-category")[0].textContent;
     if (triviaGame.category === "Random") {
       triviaGame.categoryNumber =
@@ -191,7 +200,6 @@ answerButtons.forEach((button, i) => {
     if (!triviaGame.answered && triviaGame.currentQuestion <= 9) {
       if (triviaGame.correctIndexes[triviaGame.currentQuestion] === i) {
         triviaGame.score++;
-        labelScore.textContent = triviaGame.score;
       }
       answerButtons.forEach((button, i) => {
         // correctIndex =
@@ -199,7 +207,7 @@ answerButtons.forEach((button, i) => {
           ? button.classList.add("correct-answer")
           : button.classList.add("incorrect-answer");
       });
-      triviaGame.answered = true;
+
       if (triviaGame.currentQuestion < 9) {
         setTimeout(function () {
           nextButtonEl.style.opacity = 1;
@@ -214,6 +222,9 @@ answerButtons.forEach((button, i) => {
         }, 1500);
       }
       triviaGame.currentQuestion++;
+      triviaGame.updateScore.call(triviaGame);
+      button.classList.add("selected-answer");
+      triviaGame.answered = true;
     }
   });
 });
