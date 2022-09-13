@@ -18,6 +18,7 @@
     <script src="https://unpkg.com/phosphor-icons"></script>
   </head>
   <body>
+    <button class="btn start-over">Start Over</button>
     <main>
       <div class="box box-intro">
         <h1 class="title">Let's Play Trivia!</h1>
@@ -89,13 +90,6 @@
               <span class="title-category">Sports & Leisure</span>
             </span>
           </button>
-
-          <!-- <button class="btn btn-category" id="btn-random">
-            <span>
-              <i class="ph-circle-wavy-question icon-category"></i>
-              <span class="title-category">Random</span>
-            </span>
-          </button> -->
         </div>
       </div>
 
@@ -109,7 +103,6 @@
       </div>
 
       <div class="box box-game grid hidden">
-        <!------- TAB BOX ------------------>
         <div class="box-tab flex">
           <div class="tab category-tab">
             <strong>Category: </strong><span class="current-category"></span>
@@ -119,15 +112,13 @@
           </div>
         </div>
 
-        <!------- TAB BOX ------------------>
-
         <div class="box-question flex-column">
           <h3 class="title-question">Question #1:</h3>
           <p class="current-question"></p>
         </div>
         <div class="wrapper-timer">
           <div class="question-timer">
-            <span class="time-remaining">20</span>
+            <span class="label-question-timer">20</span>
           </div>
           <button class="btn btn-next hidden">
             <span>Next <br />Question</span>

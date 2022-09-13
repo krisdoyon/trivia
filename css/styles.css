@@ -100,6 +100,15 @@ main {
   color: #444;
   transition: all 0.2s;
 }
+
+.start-over {
+  position: absolute;
+  font-size: 1.8rem;
+  padding: 1.2rem 3rem;
+  top: 1.8rem;
+  left: 1.8rem;
+}
+
 /*/ ///////////////////////*/
 /*///// INTRO BOX ////////*/
 /*/ ///////////////////////*/
@@ -194,7 +203,6 @@ main {
   padding: 6.4rem;
   border-radius: 1.8rem;
   box-shadow: 0rem 2rem 3.2rem rgba(0, 0, 0, 0.15);
-  /* color: #fff; */
 }
 
 /*/////////////////////////////////
