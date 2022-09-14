@@ -52,6 +52,7 @@ const boxCategories = document.querySelector(".box-choose-category");
 const boxTimer = document.querySelector(".box-timer");
 const boxGame = document.querySelector(".box-game");
 const boxTryAgain = document.querySelector(".box-try-again");
+const wrapperStartOver = document.querySelector(".wrapper-start-over");
 
 // INDIVIDUAL BUTTONS
 const buttonNew = document.querySelector(".btn-new-game");
@@ -231,8 +232,8 @@ const initializeGame = function () {
 
 const displayBox = function (boxToShow) {
   boxes.forEach((box) => box.classList.add("hidden"));
-  buttonStartOver.classList.remove("hidden");
-  boxToShow === boxIntro && buttonStartOver.classList.add("hidden");
+  wrapperStartOver.classList.remove("hidden");
+  boxToShow === boxIntro && wrapperStartOver.classList.add("hidden");
   boxToShow.classList.remove("hidden");
 };
 

@@ -1,6 +1,12 @@
 @media (max-width: 75em) {
   html {
-    font-size: 50%;
+    font-size: 56.25%;
+  }
+
+  .grid-categories {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 2rem;
   }
 }
 
@@ -8,7 +14,7 @@
 
 @media (max-width: 62em) {
   html {
-    font-size: 56.25%;
+    font-size: 50%;
   }
 
   .box-game {
@@ -25,11 +31,6 @@
   .box-game {
     grid-template-columns: 3fr 1fr;
   }
-
-  .grid-categories {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(5, 1fr);
-  }
 }
 
 /* BELOW 592 PX */
@@ -37,7 +38,7 @@
   body {
     flex-direction: column;
     gap: 10rem;
-    height: 120vh;
+    height: 100vh;
   }
 
   main {
