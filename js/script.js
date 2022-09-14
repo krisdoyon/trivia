@@ -44,14 +44,14 @@ const categoriesStrs = Array.from(categoriesMap.values());
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // DOM ELEMENTS
 
-const boxes = document.querySelectorAll(".box");
+const containers = document.querySelectorAll(".container");
 
-// INDIVIDUAL BOXES
-const boxIntro = document.querySelector(".box-intro");
-const boxCategories = document.querySelector(".box-choose-category");
-const boxTimer = document.querySelector(".box-timer");
-const boxGame = document.querySelector(".box-game");
-const boxTryAgain = document.querySelector(".box-try-again");
+// INDIVIDUAL CONTAINERS
+const containerIntro = document.querySelector(".container-intro");
+const containerCategories = document.querySelector(".container-categories");
+const containerTimer = document.querySelector(".container-timer");
+const containerGame = document.querySelector(".container-game");
+const containerTryAgain = document.querySelector(".container-try-again");
 const wrapperStartOver = document.querySelector(".wrapper-start-over");
 
 // INDIVIDUAL BUTTONS
@@ -68,13 +68,13 @@ const categoryButtons = document.querySelectorAll(".btn-category");
 const answerButtons = document.querySelectorAll(".btn-answer-choice");
 
 // GAMEPLAY ELEMENT LABELS
-const labelCurrentQuestion = document.querySelector(".current-question");
-const labelScore = document.querySelector(".current-score");
-const labelCategory = document.querySelector(".current-category");
-const labelQuestionNumber = document.querySelector(".title-question");
+const labelCurrentQuestion = document.querySelector(".label-current-question");
+const labelScore = document.querySelector(".label-current-score");
+const labelCategory = document.querySelector(".label-current-category");
+const labelQuestionNumber = document.querySelector(".label-question-number");
 
 // TIMER ELEMENTS
-const labelTimer = document.querySelector(".countdown-timer");
+const countdownTimer = document.querySelector(".countdown-timer");
 const labelQuestionTimer = document.querySelector(".label-question-timer");
 const questionTimerEl = document.querySelector(".question-timer");
 
@@ -93,7 +93,7 @@ const getQuestions = function () {
 
   xhr.onload = function () {
     game.data = xhr.response;
-    console.log(game.data);
+    console.log(xhr.response);
     game.questions = game.data.map((object) => object["question"]);
     game.incorrectAnswers = game.data.map(
       (object) => object["incorrectAnswers"]
@@ -104,16 +104,16 @@ const getQuestions = function () {
 
 const startGameTimer = function () {
   const tick = function () {
-    labelTimer.textContent = timeRemaining;
+    countdownTimer.textContent = timeRemaining;
     if (timeRemaining === 0) {
       clearInterval(timer);
       updateScore();
       if (game.correctAnswers.length) {
         randomizeAnswers();
-        displayBox(boxGame);
+        displaycontainer(containerGame);
         updateQuestion();
       } else {
-        displayBox(boxTryAgain);
+        displaycontainer(containerTryAgain);
       }
     }
     timeRemaining--;
@@ -170,11 +170,12 @@ const updateQuestion = function () {
   labelQuestionNumber.textContent = `Question #${game.currentQuestion + 1}:`;
   labelCurrentQuestion.innerHTML = game.questions[game.currentQuestion];
   answerButtons.forEach((button) => button.classList.remove("no-hover"));
-  displayBox(boxGame);
+  displaycontainer(containerGame);
   displayQuestionTimer();
 
   answerButtons.forEach((button, i) => {
-    button.innerHTML = game.answers[game.currentQuestion][i];
+    button.querySelector(".label-answer-choice").innerHTML =
+      game.answers[game.currentQuestion][i];
     button.classList.remove("correct-answer");
     button.classList.remove("incorrect-answer");
     button.classList.remove("selected-answer");
@@ -200,7 +201,7 @@ const resetGame = function () {
   game.incorrectAnswers = [];
   game.correctAnswers = [];
   game.answered = false;
-  displayBox(boxCategories);
+  displaycontainer(containerCategories);
   updateScore();
   answerButtons.forEach((button) => {
     button.classList.remove("correct-answer");
@@ -224,39 +225,41 @@ const displayButton = function () {
 };
 
 const initializeGame = function () {
-  displayBox(boxTimer);
+  displaycontainer(containerTimer);
   getQuestions();
   gameTimer = startGameTimer();
   updateScore();
 };
 
-const displayBox = function (boxToShow) {
-  boxes.forEach((box) => box.classList.add("hidden"));
+const displaycontainer = function (containerToShow) {
+  containers.forEach((container) => container.classList.add("hidden"));
   wrapperStartOver.classList.remove("hidden");
-  boxToShow === boxIntro && wrapperStartOver.classList.add("hidden");
-  boxToShow.classList.remove("hidden");
+  containerToShow === containerIntro &&
+    wrapperStartOver.classList.add("hidden");
+  containerToShow.classList.remove("hidden");
 };
 
-///////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // EVENT HANDLERS
 
 // NEW GAME BUTTON
 buttonNew.addEventListener("click", function () {
-  displayBox(boxCategories);
+  displaycontainer(containerCategories);
 });
 
 // CATEGORY BUTTONS
 categoryButtons.forEach((button) => {
   button.addEventListener("click", function () {
     game.category = labelCategory.textContent =
-      button.getElementsByClassName("title-category")[0].textContent;
+      button.getElementsByClassName("label-category")[0].textContent;
     game.categoryStr = categoriesMap.get(
-      button.getElementsByClassName("title-category")[0].textContent
+      button.getElementsByClassName("label-category")[0].textContent
     );
     initializeGame();
   });
 });
 
+// ANSWER BUTTONS
 answerButtons.forEach((button, i) => {
   button.addEventListener("click", function () {
     if (!game.answered && game.currentQuestion <= 9) {
@@ -285,5 +288,7 @@ buttonTryAgain.addEventListener("click", initializeGame);
 
 buttonStartOver.addEventListener("click", function () {
   resetGame();
-  displayBox(boxIntro);
+  displaycontainer(containerIntro);
 });
+
+console.log(answerButtons[0].querySelector(".label-answer-choice"));
