@@ -19,16 +19,24 @@ const game = {
 };
 
 const categoriesMap = new Map([
-  ["Arts & Literature", "arts_and_literature"],
+  ["Animals", "science&tags=animals"],
+  [
+    "Books",
+    "arts_and_literature&tags=science_fiction,fictitious_characters,classic_novels,literature",
+  ],
   ["Film & TV", "film_and_tv"],
   ["Food & Drink", "food_and_drink"],
   ["General Knowledge", "general_knowledge"],
   ["Geography", "geography"],
   ["History", "history"],
   ["Music", "music"],
+  [
+    "Physics & Astronomy",
+    "science&tags=astronomy,space,space_exploration,physics,the_solar_system",
+  ],
   ["Science", "science"],
   ["Society & Culture", "society_and_culture"],
-  ["Sports & Leisure", "sport_and_leisure"],
+  ["Sports", "sport_and_leisure&tages=sport"],
 ]);
 
 const categoriesStrs = Array.from(categoriesMap.values());
@@ -84,6 +92,7 @@ const getQuestions = function () {
 
   xhr.onload = function () {
     game.data = xhr.response;
+    console.log(game.data);
     game.questions = game.data.map((object) => object["question"]);
     game.incorrectAnswers = game.data.map(
       (object) => object["incorrectAnswers"]
