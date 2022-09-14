@@ -63,10 +63,16 @@
 
   .container-intro {
     text-align: center;
+    gap: 6.4rem;
   }
 
   .title {
-    font-size: 4.4rem;
+    font-size: 6rem;
+    padding: 8rem;
+  }
+
+  .btn-new-game {
+    margin-bottom: 8rem;
   }
 
   .label-category {
