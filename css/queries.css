@@ -48,6 +48,15 @@
     /* border-radius: 0 0 1.8rem 1.8rem; */
   }
 
+  .start-over:hover::before,
+  .btn-answer-choice:hover::before {
+    opacity: 0;
+  }
+
+  .btn-category {
+    padding: 0 1rem;
+  }
+
   .container {
     padding: 3.6rem;
   }
@@ -110,12 +119,20 @@
     font-size: 1.8rem;
   }
 
-  /* .start-over {
+  .wrapper-start-over {
     position: static;
-  } */
+    justify-content: center;
+  }
+
+  .start-over {
+    position: static;
+  }
 
   .wrapper-timer {
     grid-row: 1;
+  }
+  .wrapper-question {
+    text-align: center;
   }
 
   .btn-next {

@@ -49,12 +49,11 @@ body {
 }
 
 main {
-  background-color: #f7f7f7;
   width: 75vw;
   height: 75vh;
-  border-radius: 1.8rem;
-  box-shadow: 0rem 2rem 3.2rem rgba(0, 0, 0, 0.25);
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .hidden {
@@ -90,6 +89,14 @@ main {
   height: 100%;
   width: 100%;
   padding: 3.6rem 6rem;
+}
+
+.container-main {
+  background-color: #f7f7f7;
+  height: 100%;
+  width: 100%;
+  border-radius: 1.8rem;
+  box-shadow: 0rem 2rem 3.2rem rgba(0, 0, 0, 0.25);
 }
 
 /*///////////////////////////////////////////////////
@@ -165,9 +172,9 @@ main {
   top: 0;
   opacity: 0;
   position: absolute;
-  width: 100%;
+  /* width: 100%; */
   transition: opacity 0.3s;
-  z-index: 2;
+  /* z-index: 2; */
   background-image: var(--gradient-button);
 }
 

@@ -93,7 +93,6 @@ const getQuestions = function () {
 
   xhr.onload = function () {
     game.data = xhr.response;
-    console.log(xhr.response);
     game.questions = game.data.map((object) => object["question"]);
     game.incorrectAnswers = game.data.map(
       (object) => object["incorrectAnswers"]
@@ -270,7 +269,6 @@ answerButtons.forEach((button, i) => {
         button.classList.add("incorrect-answer");
       }
       revealCorrectAnswer();
-
       displayButton();
       game.currentQuestion++;
       updateScore();
@@ -290,5 +288,3 @@ buttonStartOver.addEventListener("click", function () {
   resetGame();
   displaycontainer(containerIntro);
 });
-
-console.log(answerButtons[0].querySelector(".label-answer-choice"));
