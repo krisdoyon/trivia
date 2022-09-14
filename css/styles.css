@@ -18,6 +18,7 @@ body {
   background-size: cover;
   height: 100vh;
   color: #444;
+  padding: 1.8rem 0;
 
   display: flex;
   justify-content: center;
@@ -164,13 +165,13 @@ main {
 .grid-categories {
   row-gap: 3.6rem;
   column-gap: 3.6rem;
-  /* grid-template-rows: repeat(3, 1fr); */
   height: 100%;
 }
 
 .btn-category {
   height: 100%;
   width: 100%;
+  padding: 1.8rem 0;
 }
 
 .icon-category {
@@ -236,6 +237,10 @@ main {
   border-radius: 1.8rem 1.8rem 0 0;
 }
 
+.tab-break {
+  display: none;
+}
+
 .wrapper-timer {
   display: flex;
   align-items: center;
@@ -291,7 +296,6 @@ main {
 
 .answer-choice-list {
   list-style: none;
-  display: grid;
   justify-content: space-between;
   grid-template-columns: 1fr;
   grid-template-rows: repeat(4, 1fr);
