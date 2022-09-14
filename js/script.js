@@ -1,5 +1,8 @@
 "use strict";
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// GLOBAL VARIABLES
+
 let questionTimer, gameTimer;
 
 const game = {
@@ -30,8 +33,8 @@ const categoriesMap = new Map([
 
 const categoriesStrs = Array.from(categoriesMap.values());
 
-///////////////////////////////////////////////////////////////////
-// ELEMENTS
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// DOM ELEMENTS
 
 const boxes = document.querySelectorAll(".box");
 
@@ -59,14 +62,14 @@ const answerButtons = document.querySelectorAll(".btn-answer-choice");
 const labelCurrentQuestion = document.querySelector(".current-question");
 const labelScore = document.querySelector(".current-score");
 const labelCategory = document.querySelector(".current-category");
-const labelTimer = document.querySelector(".countdown-timer");
-const labelQuestionTimer = document.querySelector(".label-question-timer");
 const labelQuestionNumber = document.querySelector(".title-question");
 
-// questionTim
+// TIMER ELEMENTS
+const labelTimer = document.querySelector(".countdown-timer");
+const labelQuestionTimer = document.querySelector(".label-question-timer");
 const questionTimerEl = document.querySelector(".question-timer");
 
-///////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // FUNCTIONS
 
 const getQuestions = function () {
@@ -198,11 +201,6 @@ const resetGame = function () {
   questionTimer && clearInterval(questionTimer);
 };
 
-const randomCategory = function () {
-  game.categoryStr =
-    categoriesStrs[Math.trunc(Math.random() * categoriesStrs.length)];
-};
-
 const displayQuestionTimer = function () {
   questionTimerEl.classList.remove("hidden");
   buttonPlayAgain.classList.add("hidden");
@@ -224,6 +222,8 @@ const initializeGame = function () {
 
 const displayBox = function (boxToShow) {
   boxes.forEach((box) => box.classList.add("hidden"));
+  buttonStartOver.classList.remove("hidden");
+  boxToShow === boxIntro && buttonStartOver.classList.add("hidden");
   boxToShow.classList.remove("hidden");
 };
 
@@ -274,6 +274,6 @@ buttonPlayAgain.addEventListener("click", resetGame);
 buttonTryAgain.addEventListener("click", initializeGame);
 
 buttonStartOver.addEventListener("click", function () {
-  displayBox(boxCategories);
   resetGame();
+  displayBox(boxIntro);
 });
