@@ -12,13 +12,16 @@
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap"
       rel="stylesheet"
-    />
     <link href="css/styles.css" rel="stylesheet" />
+    <link href="css/queries.css" rel="stylesheet" />
+
     <script defer src="js/script.js"></script>
     <script src="https://unpkg.com/phosphor-icons"></script>
   </head>
   <body>
-    <button class="btn start-over">Start Over</button>
+    <div class="wrapper-start-over">
+      <button class="btn start-over hidden">Start Over</button>
+    </div>
     <main>
       <div class="box box-intro">
         <h1 class="title">Let's Play Trivia!</h1>
@@ -33,25 +36,25 @@
           <button class="btn btn-category" id="btn-arts">
             <span>
               <i class="ph-books icon-category"></i>
-              <span class="title-category">Arts & Literature</span>
+              <span class="title-category">Arts & <br />Literature</span>
             </span>
           </button>
           <button class="btn btn-category" id="btn-film">
             <span>
               <i class="ph-television icon-category"></i>
-              <span class="title-category">Film & TV</span>
+              <span class="title-category">Film & <br />TV</span>
             </span>
           </button>
           <button class="btn btn-category" id="btn-food">
             <span>
               <i class="ph-hamburger icon-category"></i>
-              <span class="title-category">Food & Drink</span>
+              <span class="title-category">Food & <br />Drink</span>
             </span>
           </button>
           <button class="btn btn-category" id="btn-general">
             <span>
               <i class="ph-lightbulb icon-category"></i>
-              <span class="title-category">General Knowledge</span>
+              <span class="title-category">General <br />Knowledge</span>
             </span>
           </button>
           <button class="btn btn-category" id="btn-geography">
@@ -81,13 +84,13 @@
           <button class="btn btn-category" id="btn-society">
             <span>
               <i class="ph-users-three icon-category"></i>
-              <span class="title-category">Society & Culture</span>
+              <span class="title-category">Society & <br />Culture</span>
             </span>
           </button>
           <button class="btn btn-category" id="btn-sports">
             <span>
               <i class="ph-football icon-category"></i>
-              <span class="title-category">Sports & Leisure</span>
+              <span class="title-category">Sports & <br />Leisure</span>
             </span>
           </button>
         </div>
@@ -105,10 +108,12 @@
       <div class="box box-game grid hidden">
         <div class="box-tab flex">
           <div class="tab category-tab">
-            <strong>Category: </strong><span class="current-category"></span>
+            <strong>Category: <br class="tab-break" /></strong
+            ><span class="current-category"></span>
           </div>
           <div class="tab score-tab">
-            <strong>Score: </strong><span class="current-score"></span>
+            <strong>Score: <br class="tab-break" /></strong
+            ><span class="current-score"></span>
           </div>
         </div>
 
@@ -125,7 +130,7 @@
           </button>
           <button class="btn btn-play-again hidden">Play <br />Again</button>
         </div>
-        <ul class="answer-choice-list">
+        <ul class="answer-choice-list grid">
           <li>
             <button class="btn btn-answer-choice"></button>
           </li>
