@@ -39,7 +39,7 @@ body {
   min-height: 100vh;
   font-family: "Roboto", sans-serif;
   color: var(--text-primary);
-  padding: 10rem 3.6rem; 3.6rem 3.6rem;
+  padding: 10rem 3.6rem 3.6rem 3.6rem;
   display: flex;
   justify-content: center;
   align-items: center;
