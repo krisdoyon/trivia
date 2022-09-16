@@ -202,6 +202,8 @@ const resetGame = function () {
   game.answered = false;
   displaycontainer(containerCategories);
   updateScore();
+  labelScore.textContent = "";
+  labelCategory.textContent = "";
   answerButtons.forEach((button) => {
     button.classList.remove("correct-answer");
     button.classList.remove("incorrect-answer");
@@ -232,9 +234,6 @@ const initializeGame = function () {
 
 const displaycontainer = function (containerToShow) {
   containers.forEach((container) => container.classList.add("hidden"));
-  wrapperStartOver.classList.remove("hidden");
-  containerToShow === containerIntro &&
-    wrapperStartOver.classList.add("hidden");
   containerToShow.classList.remove("hidden");
 };
 
@@ -244,6 +243,7 @@ const displaycontainer = function (containerToShow) {
 // NEW GAME BUTTON
 buttonNew.addEventListener("click", function () {
   displaycontainer(containerCategories);
+  buttonStartOver.classList.remove("hidden");
 });
 
 // CATEGORY BUTTONS
@@ -287,4 +287,5 @@ buttonTryAgain.addEventListener("click", initializeGame);
 buttonStartOver.addEventListener("click", function () {
   resetGame();
   displaycontainer(containerIntro);
+  buttonStartOver.classList.add("hidden");
 });
