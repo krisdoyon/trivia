@@ -1,22 +1,13 @@
 /*///////////////////////////////////////////////////
-/// COLOR VARIABLES /////////////////////////////////
+/// VARIABLES ///////////////////////////////////////
 ///////////////////////////////////////////////////*/
 
 :root {
-  --grey-button-background: #ddd;
-  --button-hover: #b6ff76;
-  --text-primary: #444;
-  --color-primary: #5ec576;
-  --color-tertiary: #ff585f;
-  --color-primary-darker: #4bbb7d;
-  --color-tertiary-darker: #fd424b;
-  --color-primary-opacity: #5ec5763a;
-  --color-tertiary-opacity: #ff58602d;
-  --gradient-red: linear-gradient(to bottom right, #f07171, #e65858);
-  --gradient-red2: linear-gradient(to top left, #ff8c8c, #ff4646);
-
+  --grey-button-background: #dddddd;
+  --color-text-primary: #444;
+  --gradient-red: linear-gradient(to top left, #ff8c8c, #ff4646);
   --gradient-button: linear-gradient(to bottom right, #62e2b1, #bdff84);
-  --gradient-primary: linear-gradient(to bottom right, #27ad7a, #b6ff76);
+  --gradient-background: linear-gradient(to bottom right, #27ad7a, #b6ff76);
 }
 
 /*///////////////////////////////////////////////////
@@ -34,16 +25,11 @@ html {
 }
 
 body {
-  background-image: var(--gradient-primary);
-  background-size: cover;
+  background-image: var(--gradient-background);
   min-height: 100vh;
   font-family: "Roboto", sans-serif;
-  color: var(--text-primary);
+  color: var(--color-text-primary);
   padding: 10rem 3.6rem 3.6rem 3.6rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
   overflow-y: scroll;
 }
 
@@ -60,20 +46,18 @@ body {
   flex-direction: column;
 }
 
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .grid {
   display: grid;
 }
 
-.grid--3-cols {
-  grid-template-columns: repeat(3, 1fr);
-}
-
 .grid--4-cols {
   grid-template-columns: repeat(4, 1fr);
-}
-
-.grid--5-cols {
-  grid-template-columns: repeat(5, 1fr);
 }
 
 .container {
@@ -87,14 +71,8 @@ body {
   background-color: #f7f7f7;
   border-radius: 1.8rem 0 1.8rem 1.8rem;
   box-shadow: 0rem 2rem 3.2rem rgba(0, 0, 0, 0.25);
-  /* height: fit-content; */
-}
-
-.container-main {
   width: 75vw;
-  /* height: 75vh; */
   position: relative;
-  display: flex;
 }
 
 /*///////////////////////////////////////////////////
@@ -104,10 +82,8 @@ body {
 .btn {
   font-family: "Roboto";
   font-weight: 400;
-
   border-radius: 1.8rem;
   border: none;
-
   box-shadow: 0rem 0.5rem 1.2rem rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s;
 }
@@ -133,67 +109,53 @@ body {
   overflow: hidden;
 }
 
-.btn--gradient span,
-.btn--grey span {
-  z-index: 3;
-  position: relative;
-}
-
-.btn--gradient:before {
-  content: "";
-  position: absolute;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  top: 0;
-  opacity: 0;
-  z-index: 2;
-  background-color: rgba(255, 255, 255, 0.2);
-  transition: opacity 0.3s;
-}
-
-.btn--gradient:hover::before {
-  opacity: 1;
-}
-
 .btn--grey {
   background-color: var(--grey-button-background);
   overflow: hidden;
   position: relative;
 }
 
+.btn--gradient span,
+.btn--grey span {
+  z-index: 3;
+  position: relative;
+}
+
+.btn--gradient:before,
 .btn--grey:before {
   content: "";
+  position: absolute;
   right: 0;
   left: 0;
   bottom: 0;
   top: 0;
   opacity: 0;
-  position: absolute;
-  width: 100%;
-  transition: opacity 0.3s;
   z-index: 2;
+  transition: opacity 0.3s;
+}
+
+.btn--gradient:before {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.btn--grey:before {
   background-image: var(--gradient-button);
 }
 
+.btn--gradient:hover::before,
 .btn--grey:hover::before {
   opacity: 1;
 }
 
-.start-over {
+.btn--top {
   font-size: 1.8rem;
   padding: 1.2rem 3rem;
 }
 
-.material-icons {
-  font-size: 3rem;
-}
-
-.wrapper-start-over {
+.wrapper-top-btns {
   position: absolute;
   top: 1.8rem;
   left: 1.8rem;
-  display: flex;
   gap: 1.8rem;
 }
 
@@ -202,17 +164,12 @@ body {
 ///////////////////////////////////////////////////*/
 
 .container-intro {
-  display: flex;
-
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   gap: 12rem;
 }
 
-.title {
+.heading-intro {
   font-size: 6rem;
-  font-weight: bold;
+  font-weight: 700;
 }
 
 /*///////////////////////////////////////////////////
@@ -220,15 +177,7 @@ body {
 ///////////////////////////////////////////////////*/
 
 .container-categories {
-  gap: 3.6rem;
-  padding-bottom: 6rem;
-}
-
-.wrapper-categories-heading {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 15%;
+  gap: 3rem;
 }
 
 .heading-categories {
@@ -239,6 +188,10 @@ body {
 .grid-categories {
   gap: 2.4rem;
   flex: 1;
+}
+
+.material-icons {
+  font-size: 3rem;
 }
 
 .btn-category {
@@ -299,9 +252,7 @@ body {
 }
 
 .tab {
-  background-color: #c3fae8;
   background-color: #f7f7f7;
-
   padding: 1.4rem 3.6rem;
   font-size: 2rem;
   border-radius: 1.8rem 1.8rem 0 0;
@@ -311,14 +262,7 @@ body {
   display: none;
 }
 
-.wrapper-timer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .question-timer {
-  display: flex;
   align-items: center;
   justify-content: center;
   background-image: var(--gradient-button);
@@ -337,21 +281,14 @@ body {
 .btn-next,
 .btn-play-again {
   background-image: var(--gradient-button);
-  text-align: center;
   font-size: 2.4rem;
   height: 100%;
   width: 100%;
+  box-shadow: 0rem 0.5rem 1.2rem rgba(0, 0, 0, 0.2);
 }
 
-/* .btn-next:hover,
-.btn-play-again:hover {
-  background-image: none;
-  background-color: #c3fae8;
-} */
-
 .wrapper-question {
-  gap: 2.4rem;
-  border-radius: 1.8rem;
+  gap: 2rem;
   justify-content: space-around;
 }
 
@@ -365,34 +302,27 @@ body {
 
 .answer-choice-grid {
   list-style: none;
-  justify-content: space-between;
   grid-template-columns: 1fr;
   grid-template-rows: repeat(4, 1fr);
   gap: 3.6rem;
-  height: 100%;
   grid-column: span 2;
 }
 
 .btn-answer-choice {
   font-family: "Roboto";
-  width: 100%;
   text-align: left;
+  font-size: 2rem;
   padding: 1.2rem 2.4rem;
   height: 100%;
-  font-size: 2rem;
-  transition: box-shadow 0.3s;
+  width: 100%;
 }
-
-/* .btn-answer-choice:hover {
-  background-image: linear-gradient(to bottom right, #96f2d7, #38d9a9);
-} */
 
 .correct-answer {
   background-image: var(--gradient-button);
 }
 
 .incorrect-answer {
-  background-image: var(--gradient-red2);
+  background-image: var(--gradient-red);
 }
 
 .selected-answer {

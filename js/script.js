@@ -44,6 +44,7 @@ const categoriesStrs = Array.from(categoriesMap.values());
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // DOM ELEMENTS
 
+// CONTAINER NODELIST
 const containers = document.querySelectorAll(".container");
 
 // INDIVIDUAL CONTAINERS
@@ -52,14 +53,13 @@ const containerCategories = document.querySelector(".container-categories");
 const containerTimer = document.querySelector(".container-timer");
 const containerGame = document.querySelector(".container-game");
 const containerTryAgain = document.querySelector(".container-try-again");
-const wrapperStartOver = document.querySelector(".wrapper-start-over");
 
 // INDIVIDUAL BUTTONS
 const buttonNew = document.querySelector(".btn-new-game");
 const buttonNext = document.querySelector(".btn-next");
 const buttonPlayAgain = document.querySelector(".btn-play-again");
 const buttonTryAgain = document.querySelector(".btn-try-again");
-const buttonStartOver = document.querySelector(".start-over");
+const buttonStartOver = document.querySelector(".btn-start-over");
 
 // CATEGORY BUTTONS NODELIST
 const categoryButtons = document.querySelectorAll(".btn-category");

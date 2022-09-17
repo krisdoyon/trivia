@@ -52,9 +52,8 @@
     margin-top: 12rem;
   }
 
-  .start-over:hover::before,
-  .btn-answer-choice:hover::before {
-    opacity: 0;
+  .btn--grey::before {
+    display: none;
   }
 
   .btn-category {
@@ -70,9 +69,9 @@
     gap: 6.4rem;
   }
 
-  .title {
+  .heading-intro {
     font-size: 6rem;
-    padding: 8rem;
+    padding: 6rem 8rem;
   }
 
   .btn-new-game {
@@ -120,21 +119,11 @@
     grid-template-rows: min-content min-content auto;
   }
 
-  .label-question-timer {
-    font-size: 2.4rem;
-    padding: 1.4rem 0;
-  }
-
-  .question-timer {
-    height: min-content;
-  }
-
-  .btn-next,
   .btn-answer-choice {
     font-size: 1.8rem;
   }
 
-  .wrapper-start-over {
+  .wrapper-top-btns {
     position: static;
     justify-content: center;
     gap: 4rem;
@@ -144,16 +133,33 @@
     position: static;
   }
 
+  .btn-break {
+    display: none;
+  }
+
+  .btn-next,
+  .btn-play-again,
+  .label-question-timer {
+    padding: 1.4rem 0;
+    font-size: 2.4rem;
+  }
+
+  .btn-next,
+  .btn-play-again {
+    font-size: 2rem;
+  }
+
   .wrapper-timer {
     grid-row: 1;
+    height: 6rem;
   }
   .wrapper-question {
     text-align: center;
   }
 
-  .btn-next {
+  /* .btn-next {
     grid-column: 1/-1;
-  }
+  } */
 
   .tab {
     text-align: center;

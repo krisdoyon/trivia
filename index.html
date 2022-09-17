@@ -4,9 +4,10 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    <meta name="description" content="A simple 10 question trivia game" />
+    <meta name="author" content="Kris Doyon" />
     <title>Let's Play Trivia!</title>
-
+    <link rel="icon" href="fav-icon.png?" />
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
@@ -18,24 +19,27 @@
     <link href="css/styles.css" rel="stylesheet" />
     <link href="css/queries.css" rel="stylesheet" />
     <link href="css/disco.css" rel="stylesheet" />
-
     <script defer src="js/script.js"></script>
     <script src="js/disco.js" defer></script>
   </head>
 
-  <body>
+  <body class="flex-center">
+    <!-- DISCO MODE LAYERS -->
     <div class="layer layer-1 layer--active hidden"></div>
     <div class="layer layer-2 hidden"></div>
-    <div class="wrapper-start-over flex">
-      <button class="btn start-over btn--grey">
+
+    <!-- START OVER AND DISCO MODE BUTTONS -->
+    <div class="wrapper-top-btns flex">
+      <button class="btn btn--top btn--grey btn-start-over">
         <span>Start Over</span>
       </button>
-      <button class="btn start-over disco-btn btn--grey">
+      <button class="btn btn--top btn--grey btn-disco">
         <span>Disco Mode</span>
       </button>
     </div>
 
-    <div class="container-main">
+    <div class="container-main flex">
+      <!-- SCORE/CATEGORY TABS  -->
       <div class="wrapper-tabs flex">
         <div class="tab category-tab">
           <strong>Category: <br class="tab-break" /></strong
@@ -46,87 +50,86 @@
           ><span class="label-current-score"></span>
         </div>
       </div>
-      <div class="container container-intro hidden">
-        <h1 class="title">Let's Play Trivia!</h1>
+
+      <!-- INTRO CONTAINER -->
+      <div class="container container-intro flex-column flex-center">
+        <h1 class="heading-intro">Let's Play Trivia!</h1>
         <button class="btn btn--large btn--gradient btn-new-game">
           <span>New Game</span>
         </button>
       </div>
 
+      <!-- CATEGORIES CONTAINER -->
       <div class="container container-categories flex-column hidden">
         <h2 class="heading-categories">Choose category</h2>
         <div class="grid grid--4-cols grid-categories">
-          <button class="btn btn-category btn--grey" id="btn-animals">
+          <button class="btn btn-category btn--grey">
             <span>
               <span class="material-icons"> pets </span>
               <span class="label-category">Animals</span>
             </span>
           </button>
-          <button class="btn btn-category btn--grey" id="btn-books">
+          <button class="btn btn-category btn--grey">
             <span>
               <span class="material-icons"> menu_book </span>
               <span class="label-category">Books</span>
             </span>
           </button>
-
-          <button class="btn btn-category btn--grey" id="btn-food">
+          <button class="btn btn-category btn--grey">
             <span>
               <span class="material-icons"> restaurant </span>
               <span class="label-category">Food & Drink</span>
             </span>
           </button>
-
-          <button class="btn btn-category btn--grey" id="btn-general">
+          <button class="btn btn-category btn--grey">
             <span>
               <span class="material-icons"> psychology </span>
               <span class="label-category">General Knowledge</span>
             </span>
           </button>
-
-          <button class="btn btn-category btn--grey" id="btn-geography">
+          <button class="btn btn-category btn--grey">
             <span>
               <span class="material-icons"> public </span>
               <span class="label-category">Geography</span>
             </span>
           </button>
-          <button class="btn btn-category btn--grey" id="btn-history">
+          <button class="btn btn-category btn--grey">
             <span>
               <span class="material-icons"> history_edu </span>
               <span class="label-category">History</span>
             </span>
           </button>
-          <button class="btn btn-category btn--grey" id="btn-music">
+          <button class="btn btn-category btn--grey">
             <span>
               <span class="material-icons"> music_note </span>
               <span class="label-category">Music</span>
             </span>
           </button>
-          <button class="btn btn-category btn--grey" id="btn-astronomy">
+          <button class="btn btn-category btn--grey">
             <span>
               <span class="material-icons"> rocket_launch </span>
               <span class="label-category">Physics & Astronomy</span>
             </span>
           </button>
-          <button class="btn btn-category btn--grey" id="btn-science">
+          <button class="btn btn-category btn--grey">
             <span>
               <span class="material-icons"> science </span>
-
               <span class="label-category">Science</span>
             </span>
           </button>
-          <button class="btn btn-category btn--grey" id="btn-society">
+          <button class="btn btn-category btn--grey">
             <span>
               <span class="material-icons"> diversity_3 </span>
               <span class="label-category">Society & Culture</span>
             </span>
           </button>
-          <button class="btn btn-category btn--grey" id="btn-sports">
+          <button class="btn btn-category btn--grey">
             <span>
               <span class="material-icons"> sports_football </span>
               <span class="label-category">Sports</span>
             </span>
           </button>
-          <button class="btn btn-category btn--grey" id="btn-movies">
+          <button class="btn btn-category btn--grey">
             <span>
               <span class="material-icons"> tv </span>
               <span class="label-category">TV & Movies</span>
@@ -135,31 +138,34 @@
         </div>
       </div>
 
+      <!-- COUNTDOWN TIMER CONTAINER -->
       <div class="container container-timer flex hidden">
-        <span class="countdown-timer">3</span>
+        <span class="countdown-timer"></span>
       </div>
 
+      <!-- INTRO CONTAINER -->
       <div class="container container-intro container-try-again hidden">
-        <h2 class="title">Error loading questions :(</h2>
+        <h2 class="heading-intro">Error loading questions :(</h2>
         <button class="btn btn--large btn--gradient btn-try-again btn-new-game">
           Try Again
         </button>
       </div>
 
-      <div class="container container-game grid">
+      <!-- GAME CONTAINER -->
+      <div class="container container-game grid hidden">
         <div class="wrapper-question flex-column">
           <h3 class="label-question-number">Question #1:</h3>
           <p class="label-current-question"></p>
         </div>
-        <div class="wrapper-timer">
-          <div class="question-timer">
-            <span class="label-question-timer">20</span>
+        <div class="wrapper-timer flex-center">
+          <div class="question-timer flex">
+            <span class="label-question-timer"></span>
           </div>
           <button class="btn btn-next btn--gradient hidden">
-            <span>Next <br />Question</span>
+            <span>Next <br class="btn-break" />Question</span>
           </button>
           <button class="btn btn-play-again btn--gradient hidden">
-            Play <br />Again
+            Play <br class="btn-break" />Again
           </button>
         </div>
         <ul class="answer-choice-grid grid">

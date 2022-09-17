@@ -1,6 +1,6 @@
 // Two absolutely positioned, fixed rectangles that occupy the entire viewport
 
-const discoButton = document.querySelector(".disco-btn");
+const discoButton = document.querySelector(".btn-disco");
 const layer1 = document.querySelector(".layer-1"); // to top left
 const layer2 = document.querySelector(".layer-2"); // to top right
 const layers = document.querySelectorAll(".layer");
@@ -25,11 +25,7 @@ const generateRandomGradient = function (side) {
 layer1.style.backgroundImage = generateRandomGradient("left");
 
 const startDiscoMode = function () {
-  // discoMode = true;
-  layer1.classList.remove("hidden");
-  layer2.classList.remove("hidden");
-  // bodyEl.style.backgroundImage = "transparent";
-
+  layers.forEach((layer) => layer.classList.remove("hidden"));
   let counter = 0;
   const updateBackground = function () {
     layers.forEach((layer) => {
