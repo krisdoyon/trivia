@@ -23,3 +23,24 @@
 {"id":30,"name":"Science: Gadgets"},
 {"id":31,"name":"Entertainment: Japanese Anime & Manga"},
 {"id":32,"name":"Entertainment: Cartoon & Animations"}]}
+
+### TO ADD
+
+- Favicon
+- Meta description
+-
+
+### Difficulty Button:
+
+- Show timer
+- Update the current question with first
+
+### Answer Button:
+
+- Show icons next to all answers
+- Hilight chosen answer with color (green/red)
+
+
+Right now after pressing category:
+
+Set the category
