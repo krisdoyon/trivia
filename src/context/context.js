@@ -103,6 +103,8 @@ const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [isDisco, setIsDisco] = useState(false);
 
+  console.log(state);
+
   const getQuestions = async (item) => {
     try {
       dispatch({
@@ -113,7 +115,6 @@ const AppProvider = ({ children }) => {
       const response = await fetch(url);
       if (!response.ok) throw new Error();
       const data = await response.json();
-      console.log(data);
       dispatch({ type: "INITIALIZE_GAME", payload: data });
     } catch (error) {
       console.error(error);
