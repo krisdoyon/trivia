@@ -62,6 +62,8 @@ const reducer = (state, action) => {
   }
 
   if (action.type === "ANSWER") {
+    console.log(action.payload);
+    console.log(state.correctIndexes[state.questionIndex]);
     const newScore =
       action.payload === state.correctIndexes[state.questionIndex]
         ? state.score++
