@@ -102,8 +102,6 @@ const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [isDisco, setIsDisco] = useState(false);
 
-  console.log(state);
-
   const getQuestions = async (item) => {
     try {
       dispatch({
