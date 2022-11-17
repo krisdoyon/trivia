@@ -1,0 +1,48 @@
+@use "../abstracts/mixins" as *;
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: var(--gradient-background);
+  min-height: 100vh;
+  padding: 10rem 3.6rem 3.6rem 3.6rem;
+  overflow-y: auto;
+
+  @include respond(600) {
+    flex-direction: column;
+    padding: 2.4rem;
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 3.6rem 6rem;
+  min-height: 75vh;
+
+  @include respond(1000) {
+    grid-template-columns: 4fr 1fr;
+  }
+
+  @include respond(800) {
+    grid-template-columns: 3fr 1fr;
+  }
+
+  @include respond(600) {
+    padding: 3.6rem;
+  }
+}
+
+.container-main {
+  background-color: #f7f7f7;
+  border-radius: 1.8rem 0 1.8rem 1.8rem;
+  box-shadow: 0rem 2rem 3.2rem rgba(0, 0, 0, 0.25);
+  width: 75vw;
+  position: relative;
+
+  @include respond(600) {
+    margin-top: 12rem;
+    border-radius: 0 0 1.8rem 1.8rem;
+  }
+}

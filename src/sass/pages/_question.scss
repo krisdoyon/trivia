@@ -1,0 +1,150 @@
+@use "../abstracts/mixins" as *;
+
+.container-game {
+  display: grid;
+  grid-template-columns: 6fr 1fr;
+  grid-template-rows: 2fr 6fr;
+  border-radius: 1.8rem 0 1.8rem 1.8rem;
+  gap: 3.6rem;
+  z-index: 1;
+
+  @include respond(600) {
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content min-content auto;
+  }
+}
+
+.question-timer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: var(--gradient-button);
+  border-radius: 1.8rem;
+  font-size: 3.6rem;
+  text-align: center;
+  height: 100%;
+  width: 100%;
+  box-shadow: 0rem 0.5rem 1.2rem rgba(0, 0, 0, 0.2);
+}
+
+.low-time {
+  background-image: linear-gradient(to bottom right, #ffa8a8, #fa5252);
+}
+
+.btn-next,
+.btn-play-again {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-image: var(--gradient-button);
+  font-size: 2.4rem;
+  height: 100%;
+  width: 100%;
+  box-shadow: 0rem 0.5rem 1.2rem rgba(0, 0, 0, 0.2);
+
+  @include respond(600) {
+    padding: 1.4rem 0;
+    font-size: 2rem;
+  }
+}
+
+.wrapper-question {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: space-around;
+
+  @include respond(600) {
+    text-align: center;
+  }
+}
+
+.label-question-number {
+  font-size: 4rem;
+
+  @include respond(600) {
+    font-size: 3.2rem;
+  }
+}
+
+.label-current-question {
+  font-size: 2.4rem;
+
+  @include respond(600) {
+    font-size: 2rem;
+  }
+}
+
+.answer-choice-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(4, 1fr);
+  gap: 3.6rem;
+  grid-column: span 2;
+
+  @include respond(600) {
+    grid-column: span 1;
+    flex: 1;
+  }
+}
+
+.btn-answer-choice {
+  font-family: inherit;
+  text-align: left;
+  font-size: 2rem;
+  padding: 1.2rem 2.4rem;
+  height: 100%;
+  width: 100%;
+
+  @include respond(600) {
+    text-align: center;
+    font-size: 1.8rem;
+  }
+}
+
+.correct-answer {
+  background-image: var(--gradient-button);
+}
+
+.incorrect-answer {
+  background-image: var(--gradient-red);
+}
+
+.selected-answer {
+  font-weight: 700;
+}
+
+.no-hover {
+  pointer-events: none;
+}
+
+.wrapper-timer {
+  @include respond(600) {
+    grid-row: 1;
+    height: 6rem;
+  }
+}
+
+.label-question-timer {
+  @include respond(600) {
+    padding: 1.4rem 0;
+    font-size: 2.4rem;
+  }
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  grid-column: 1/-1;
+  align-items: center;
+  text-align: center;
+  grid-row: 1/-1;
+  font-size: 6rem;
+  margin-bottom: 4rem;
+
+  @include respond(600) {
+    font-size: 3.6rem;
+  }
+}

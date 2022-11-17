@@ -17,6 +17,10 @@
 html {
   font-size: 62.5%;
   scroll-behavior: smooth;
+
+  @include respond(1000) {
+    font-size: 50%;
+  }
 }
 
 body {

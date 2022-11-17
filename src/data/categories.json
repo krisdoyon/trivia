@@ -1,0 +1,62 @@
+[
+  {
+    "category": "Animals",
+    "urlString": "science&tags=animals",
+    "icon": "paw"
+  },
+  {
+    "category": "Books",
+    "urlString": "arts_and_literature&tags=science_fiction,fictitious_characters,classic_novels,literature",
+    "icon": "book"
+  },
+  {
+    "category": "Food & Drink",
+    "urlString": "food_and_drink",
+    "icon": "utensils"
+  },
+  {
+    "category": "General Knowledge",
+    "urlString": "general_knowledge",
+    "icon": "lightbulb"
+  },
+  {
+    "category": "Geography",
+    "urlString": "geography",
+    "icon": "earth"
+  },
+  {
+    "category": "History",
+    "urlString": "history",
+    "icon": "landmark"
+  },
+  {
+    "category": "Music",
+    "urlString": "music",
+    "icon": "music"
+  },
+  {
+    "category": "Physics & Astronomy",
+    "urlString": "science&tags=astronomy,space,space_exploration,physics,the_solar_system",
+    "icon": "rocket"
+  },
+  {
+    "category": "Science",
+    "urlString": "science",
+    "icon": "atom"
+  },
+  {
+    "category": "Society & Culture",
+    "urlString": "society_and_culture",
+    "icon": "people"
+  },
+  {
+    "category": "Sports",
+    "urlString": "sport_and_leisure&tages=sport",
+    "icon": "football"
+  },
+  {
+    "category": "TV & Movies",
+    "urlString": "science&tags=animals",
+    "icon": "tv"
+  }
+]

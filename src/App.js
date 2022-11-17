@@ -1,23 +1,24 @@
-import React from "react";
-// REACT ROUTER
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+// ROUTER
+import { Routes, Route } from "react-router-dom";
 // PAGE COMPONENTS
-import Home from "./pages/Home";
-import PageNotFound from "./pages/PageNotFound";
-import SharedLayout from "./pages/SharedLayout";
+import Layout from "./components/Layout";
+import Intro from "./components/Intro";
+import Categories from "./components/Categories";
+import PageNotFound from "./components/PageNotFound";
+import Question from "./components/Question";
 // SASS
 import "./sass/main.scss";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<SharedLayout />}>
-          <Route index element={<Home />} />
-          <Route path="*" element={<PageNotFound />} />
-        </Route>
-      </Routes>
-    </Router>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Intro />} />
+        <Route path="categories" element={<Categories />} />
+        <Route path="question" element={<Question />} />
+        <Route path="*" element={<PageNotFound />} />
+      </Route>
+    </Routes>
   );
 }
 

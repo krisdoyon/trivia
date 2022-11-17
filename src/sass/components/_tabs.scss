@@ -1,0 +1,38 @@
+@use "../abstracts/mixins" as *;
+
+.wrapper-tabs {
+  display: flex;
+  position: absolute;
+  top: 0;
+  transform: translateY(-100%);
+  gap: 1.2rem;
+  right: 0;
+
+  @include respond(600) {
+    width: 100%;
+    justify-content: space-between;
+    transform: translate(0, -98%);
+  }
+}
+
+.tab {
+  background-color: #f7f7f7;
+  padding: 1.4rem 3.6rem;
+  font-size: 2rem;
+  border-radius: 1.8rem 1.8rem 0 0;
+
+  @include respond(600) {
+    text-align: center;
+    font-size: 1.8rem;
+    flex: 1;
+    min-height: 7.2rem;
+  }
+}
+
+.tab-break {
+  display: none;
+
+  @include respond(600) {
+    display: block;
+  }
+}
