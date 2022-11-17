@@ -30,7 +30,7 @@ const Question = () => {
       timeout = setTimeout(() => dispatch({ type: "TICK" }), 1000);
     }
     return () => clearTimeout(timeout);
-  }, [dispatch, timer]);
+  }, [dispatch, timer, isAnswered]);
 
   if (!isLoading && questions.length === 0) return <PageNotFound />;
 
