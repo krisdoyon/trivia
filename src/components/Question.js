@@ -26,7 +26,7 @@ const Question = () => {
 
   useEffect(() => {
     let timeout;
-    if (timer > 0) {
+    if (!isAnswered && timer > 0) {
       timeout = setTimeout(() => dispatch({ type: "TICK" }), 1000);
     }
     return () => clearTimeout(timeout);
