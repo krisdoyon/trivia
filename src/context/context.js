@@ -62,17 +62,14 @@ const reducer = (state, action) => {
   }
 
   if (action.type === "ANSWER") {
-    console.log(action.payload);
-    console.log(state.correctIndexes[state.questionIndex]);
-    const newScore =
-      action.payload === state.correctIndexes[state.questionIndex]
-        ? state.score++
-        : state.score;
     return {
       ...state,
       isAnswered: true,
       answeredIndex: action.payload,
-      score: newScore,
+      score:
+        action.payload === state.correctIndexes[state.questionIndex]
+          ? state.score + 1
+          : state.score,
       timer: 15,
     };
   }
